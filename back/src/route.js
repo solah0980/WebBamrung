@@ -2,6 +2,7 @@ const adminController = require('./controller/adminController')
 const subject = require('./controller/subject')
 const teacher = require('./controller/teacher')
 const client = require('./controller/client')
+const activity = require('./controller/activity')
 const authen = require('./authen/authen')
 let fs = require('fs')
 let multer = require('multer')
@@ -11,7 +12,7 @@ module.exports = (app)=>{
     app.post('/admin/create',adminController.createAdmin)
 
     //Api Client
-    app.get('/subject/view/:name',client.showClient)
+    app.get('/subject/view/:name',client.showClientSuject)
     app.get('/subject/view/teachers/:id',client.showTeacherClient)
 
 
@@ -30,6 +31,9 @@ module.exports = (app)=>{
    app.put('/admin/teacher/edit/:id',teacher.edit)
    app.delete('/admin/techer/delete/:id',teacher.delete)
 
+   //Api Activity Admin
+   app.post('/admin/activity/create',activity.createActivity)
+
     //Api Upload Photo and Delete Photo
     app.post('/upload',function(req,res){
         upload(req,res,function(err){
@@ -40,7 +44,6 @@ module.exports = (app)=>{
         })
     })
     app.post('/delete',(req,res)=>{
-         console.log(req.body)
          fs.unlink(__dirname+'/..'+'/public/uploads/'+req.body.name,function(err){
              if(err){
                  console.log(err)
@@ -58,4 +61,8 @@ module.exports = (app)=>{
         }
     })
     let upload = multer({storage:storage}).array("userPhoto",10)
+
+    app.get('/test',(req,res)=>{
+        res.send('ok success')
+    })
 }

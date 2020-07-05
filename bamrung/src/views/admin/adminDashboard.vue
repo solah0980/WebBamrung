@@ -5,7 +5,7 @@
       <div class="container-fuild">
         <div class="content d-flex flex-row justify-content-between flex-wrap">
           <div class="card bg-primary text-white text-center p-3 mb-3" >
-            <blockquote class="blockquote mb-0">
+            <blockquote class="blockquote mb-0" >
               <h3>
                 ระบบจัดการข่าวสาร
               </h3>

@@ -10,6 +10,8 @@ import Subject from '../views/admin/subject/index'
 import TeacherEdit from '../views/admin/teacher/Edit'
 import Teacher from '../views/admin/teacher/index'
 import TeacherCreate from '../views/admin/teacher/Create'
+import ActivityCreate from '../views/admin/activity/create'
+
 Vue.use(VueRouter)
 
   const routes = [
@@ -62,6 +64,11 @@ Vue.use(VueRouter)
     path: '/subject/view/',
     name: 'SubjectView',
     component: SubjectView
+  },
+  {
+    path: '/admin/activity/create',
+    name: ActivityCreate,
+    component: ActivityCreate
   }
 ]
 

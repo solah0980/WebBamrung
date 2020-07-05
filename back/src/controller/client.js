@@ -1,7 +1,7 @@
 const db = require("../config/config");
 
 module.exports = {
-  showClient(req, res) {
+  showClientSuject(req, res) {
     let name = req.params.name
     db.get(`SELECT * FROM gSubject WHERE title  = '${name}'`,function(err,result){
         if(err){
@@ -20,7 +20,6 @@ module.exports = {
             return console.log(err)
         }
         a=result.length
-        console.log(a)
         if(a==0)return res.send({data:'ไม่มีข้อมูลคุณครู'})
         else{
         result.forEach((r)=>{

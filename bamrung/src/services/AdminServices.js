@@ -48,7 +48,12 @@ export default {
     },
     DeleteTeacher(data){
         return Api().delete('/admin/techer/delete/'+data)
-    }
+    },
  /*----------------------------------------------------*/
+
+    //API Manage Activity
+    CreateActivity(data){
+        return Api().post('/admin/activity/create',data)
+    }
     
 }
