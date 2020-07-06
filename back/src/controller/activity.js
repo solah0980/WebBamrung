@@ -13,12 +13,29 @@ module.exports={
 
     },
     showAll(req,res){
-      db.all('SELECT * from activity WHERE status="true"',function(err,result){
-        if(err){
-          return console.log(err.message)
-        }
-        res.send(result)
-      })
+      console.log(req.params.name)
+      if(req.params.name=='admin'){
+        db.all('SELECT * from activity', function (err, result) {
+          if (err) {
+            return console.log(err.message)
+          }
+          res.send(result)
+        })
+      }else if(req.params.name=='client'){
+        db.all('SELECT * from activity WHERE status="true"', function (err, result) {
+          if (err) {
+            return console.log(err.message)
+          }
+          res.send(result)
+        })
+      }else{
+        db.all('SELECT * from activity WHERE status="true" ORDER BY activityID DESC', function (err, result) {
+          if (err) {
+            return console.log(err.message)
+          }
+          res.send(result.slice(0,6))
+        })
+      }
     },
     editActivity(req,res){
       if(req.body.set){

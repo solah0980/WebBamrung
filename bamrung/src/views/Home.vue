@@ -14,7 +14,7 @@
         <h5 class="section-h">Activity กิจกรรมภายในโรงเรียน</h5>
         <div class="row">
           <div
-            class="card-body col-md-9 d-flex flex-row justify-content-between flex-wrap"
+            class="card-body col-md-9 d-flex flex-row flex-wrap"
           >
             <div class="card mb-3" v-for="d in data" :key="d.activityID">
               <img
@@ -64,7 +64,7 @@ export default {
     Navbar,Banner,contractSide
   },
   async created() {
-    this.data = (await Api.ShowActivityAll()).data;
+    this.data = (await Api.ShowActivityAll({nam:'home'})).data;
     console.log(this.data);
   },
 };
@@ -96,6 +96,8 @@ export default {
   cursor: pointer;
   width: 260px;
   overflow: hidden;
+  height: 363px !important;
+  margin-right: 15px;
 }
 .card:hover img {
   opacity: 0.8;

@@ -55,8 +55,8 @@ export default {
     CreateActivity(data){
         return Api().post('/admin/activity/create',data)
     },
-    ShowActivityAll(){
-        return Api().get('/admin/activitys')
+    ShowActivityAll(data){
+        return Api().get('/admin/activitys/'+data.name)
     },
     EditActivity(data){
         return Api().put('/admin/activity/edit/'+data.activityID,data)

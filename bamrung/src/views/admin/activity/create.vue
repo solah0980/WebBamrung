@@ -114,7 +114,7 @@ export default {
           title: r.data,
           icon: "success",
           confirmButtonText: "ตกลง",
-        })/* .then(()=>this.$router.push({name:'Admi'})) */ 
+        }).then(()=>this.$router.push({name:'ActivityViews'})) 
       
     },
 

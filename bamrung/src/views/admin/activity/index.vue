@@ -60,11 +60,6 @@ export default {
     Navbar,
   },
   methods: {
-    async EditTeacher(id, name) {
-      this.gsubjectID = id;
-      this.modalName = name;
-      this.teacherHave = (await Api.ShowTeacherSubject(id)).data;
-    },
     async StatusActivity(data){
         if(data.status=='true'){
             data.status='false'
@@ -82,7 +77,7 @@ export default {
     },
   },
   async created() {
-    this.data = (await Api.ShowActivityAll()).data;
+    this.data = (await Api.ShowActivityAll({name:'admin'})).data;
   },
 };
 </script>

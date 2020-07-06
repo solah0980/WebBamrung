@@ -33,7 +33,7 @@ module.exports = (app)=>{
 
    //Api Activity Admin
    app.get('/admin/activity/show/:id',activity.show)
-   app.get('/admin/activitys',activity.showAll)
+   app.get('/admin/activitys/:name',activity.showAll)
    app.post('/admin/activity/create',activity.createActivity)
    app.put('/admin/activity/edit/:id',activity.editActivity)
 
