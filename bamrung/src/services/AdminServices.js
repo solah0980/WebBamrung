@@ -54,6 +54,15 @@ export default {
     //API Manage Activity
     CreateActivity(data){
         return Api().post('/admin/activity/create',data)
+    },
+    ShowActivityAll(){
+        return Api().get('/admin/activitys')
+    },
+    EditActivity(data){
+        return Api().put('/admin/activity/edit/'+data.activityID,data)
+    },
+    ShowActivity(id){
+        return Api().get('/admin/activity/show/'+id)
     }
     
 }

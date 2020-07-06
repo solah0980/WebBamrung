@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar />
-    <form class="mt-5" v-on:submit.prevent="CreateBlog">
+    <form class="mt-5" v-on:submit.prevent="EditBlog">
       <div class="form-group">
         <label for="exampleInputEmail1">หัวข้อกิจกรรม</label>
         <input
@@ -100,21 +100,15 @@ export default {
       });
     },
 
-    async CreateBlog() {
+    async EditBlog() {
       let photo = JSON.stringify(this.photo);
-      let data = {
-        title: this.data.title,
-        thumbnail:this.data.thumbnail,
-        content: this.data.content,
-        pictures: photo,
-        status:'true',
-      };
-       let r = await Api.CreateActivity(data)
+      this.data.pictures=photo
+      let r = await Api.EditActivity(this.data)
       Swal.fire({
           title: r.data,
           icon: "success",
           confirmButtonText: "ตกลง",
-        })/* .then(()=>this.$router.push({name:'Admi'})) */ 
+        }).then(()=>this.$router.push({name:'ActivityViews'})) 
       
     },
 
@@ -144,12 +138,12 @@ export default {
   },
 
   async created() {
-    /* let id = this.$route.params.id;
-    this.data = await Api.ShowSubject(id);
+    let id = this.$route.params.id;
+    this.data = await Api.ShowActivity(id);
     this.data = this.data.data;
     if (this.data.pictures !== null && this.data.pictures !== "") {
       this.photo = JSON.parse(this.data.pictures);
-    } */
+    }
   },
 };
 </script>

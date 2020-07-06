@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Activity from '../views/Activity.vue'
+import Activity from '../views/Activity'
 import SubjectView from '../views/Subject.vue'
 import AdminDashboard from '../views/admin/adminDashboard'
 import AdminLogin from '../views/admin/adminLogin'
@@ -10,7 +10,9 @@ import Subject from '../views/admin/subject/index'
 import TeacherEdit from '../views/admin/teacher/Edit'
 import Teacher from '../views/admin/teacher/index'
 import TeacherCreate from '../views/admin/teacher/Create'
+import ActivityViews from '../views/admin/activity/index'
 import ActivityCreate from '../views/admin/activity/create'
+import ActivityEdit from '../views/admin/activity/edit'
 
 Vue.use(VueRouter)
 
@@ -64,11 +66,20 @@ Vue.use(VueRouter)
     path: '/subject/view/',
     name: 'SubjectView',
     component: SubjectView
+  },{
+    path: '/admin/activity',
+    name: 'ActivityViews',
+    component: ActivityViews
   },
   {
     path: '/admin/activity/create',
-    name: ActivityCreate,
+    name: 'ActivityCreate',
     component: ActivityCreate
+  },
+  {
+    path: '/admin/activity/edit/:id',
+    name: 'ActivityEdit',
+    component: ActivityEdit
   }
 ]
 

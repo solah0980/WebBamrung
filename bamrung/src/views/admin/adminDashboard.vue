@@ -4,7 +4,7 @@
     <div class="section mt-4 p-5">
       <div class="container-fuild">
         <div class="content d-flex flex-row justify-content-between flex-wrap">
-          <div class="card bg-primary text-white text-center p-3 mb-3" >
+          <div class="card bg-primary text-white text-center p-3 mb-3">
             <blockquote class="blockquote mb-0" >
               <h3>
                 ระบบจัดการข่าวสาร
@@ -15,6 +15,13 @@
             <blockquote class="blockquote mb-0">
               <h3>
                 ระบบจัดการกลุ่มสาระวิชา
+              </h3>
+            </blockquote>
+          </div>
+          <div class="card bg-primary text-white text-center p-3 mb-3" v-on:click="navigateTo('ActivityViews')">
+            <blockquote class="blockquote mb-0">
+              <h3>
+                ระบบจัดการกิจกรรม
               </h3>
             </blockquote>
           </div>

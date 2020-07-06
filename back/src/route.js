@@ -32,7 +32,10 @@ module.exports = (app)=>{
    app.delete('/admin/techer/delete/:id',teacher.delete)
 
    //Api Activity Admin
+   app.get('/admin/activity/show/:id',activity.show)
+   app.get('/admin/activitys',activity.showAll)
    app.post('/admin/activity/create',activity.createActivity)
+   app.put('/admin/activity/edit/:id',activity.editActivity)
 
     //Api Upload Photo and Delete Photo
     app.post('/upload',function(req,res){
@@ -44,7 +47,7 @@ module.exports = (app)=>{
         })
     })
     app.post('/delete',(req,res)=>{
-         fs.unlink(__dirname+'/..'+'/public/uploads/'+req.body.name,function(err){
+         fs.unlink(__dirname+'/public/uploads/'+req.body.name,function(err){
              if(err){
                  console.log(err)
              }
@@ -54,15 +57,11 @@ module.exports = (app)=>{
      })
     let storage = multer.diskStorage({
         destination:function(req,file,callback){
-            callback(null,"../public/uploads")
+            callback(null,"public/uploads")
         },
         filename:function(req,file,callback){
             callback(null, file.originalname)
         }
     })
     let upload = multer({storage:storage}).array("userPhoto",10)
-
-    app.get('/test',(req,res)=>{
-        res.send('ok success')
-    })
 }

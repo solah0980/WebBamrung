@@ -8,7 +8,7 @@ app.use(bodyPaser.json())
 app.use(bodyPaser.urlencoded({extended:false}))
 
 app.use(cors())
-app.use('/assets', express.static('../public'))
+app.use('/assets', express.static('public'))
 
 require('./passport')
 require('./config/config')
