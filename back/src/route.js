@@ -7,6 +7,9 @@ const authen = require('./authen/authen')
 let fs = require('fs')
 let multer = require('multer')
 module.exports = (app)=>{
+    app.get('/',(req,res)=>{
+        console.log('hello world')
+    })
     //Api Admin Login & Logout
     app.post('/admin/login',adminController.adminLogin)
     app.post('/admin/create',adminController.createAdmin)
