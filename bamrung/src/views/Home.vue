@@ -64,7 +64,7 @@ import contractSide from "../components/contractSide";
 export default {
   data() {
     return {
-      baseURL: "/api/assets/uploads/",
+      baseURL: "http://localhost:8081/assets/uploads/",
       data: null,
       title1: "โรงเรียนบำรุงอิสลาม",
       title2: "BAMRUNG ISLAM SCHOOL Phatthalung",

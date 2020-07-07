@@ -69,7 +69,7 @@ import Api from "../services/ClientServices";
 export default {
   data() {
     return {
-      baseURL: "http://localhost:8081/assets/uploads/",
+      baseURL: "/api/assets/uploads/",
       teachers: null,
       data: "",
       name: null,
