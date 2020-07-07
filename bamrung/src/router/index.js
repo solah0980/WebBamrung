@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Activity from '../views/Activity'
+import ActivitySub from '../views/ActivitySub'
 import SubjectView from '../views/Subject.vue'
 import AdminDashboard from '../views/admin/adminDashboard'
 import AdminLogin from '../views/admin/adminLogin'
@@ -26,6 +27,11 @@ Vue.use(VueRouter)
     path: '/activity',
     name: 'Activity',
     component: Activity
+  },
+  {
+    path: '/activity/view/:id',
+    name: 'ActivitySub',
+    component: ActivitySub
   },
   {
     path: '/admin/login',

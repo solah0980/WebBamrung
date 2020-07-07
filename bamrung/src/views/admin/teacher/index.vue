@@ -54,7 +54,7 @@ import Api from "../../../services/AdminServices";
 export default {
   data() {
     return {
-      baseURL: "http://localhost:8081/assets/uploads/",
+      baseURL: "/api/assets/uploads/",
       data: null,
       pathEdit: "/admin/subject/edit/",
       pathTeacher: "",

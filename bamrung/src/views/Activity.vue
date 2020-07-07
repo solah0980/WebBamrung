@@ -18,9 +18,8 @@
       <div class="container">
         <div class="row">
           <div
-            class="card-body col-md-9 d-flex flex-row  flex-wrap"
-          >
-            <div class="card mb-3" v-for="d in data" :key="d.activityID">
+            class="card-body col-md-9 d-flex flex-row  flex-wrap" >
+            <div class="card mb-3" v-for="d in data" :key="d.activityID" @click="navigateTO('/activity/view/'+d.activityID)">
               <img
                 :src="baseURL + d.thumbnail"
                 class="card-img-top"
@@ -58,7 +57,7 @@ import contractSide from '../components/contractSide'
 export default {
   data() {
     return {
-      baseURL: "http://localhost:8081/assets/uploads/",
+      baseURL: "/api/assets/uploads/",
       data: null,
       title1: "ประมวลภาพกิจกรรม",
       title2: "Photo Activity",
@@ -72,6 +71,12 @@ export default {
   async created() {
     this.data = (await Api.ShowActivityAll({name:'client'})).data;
     console.log(this.data);
+  },
+  methods: {
+    navigateTO(name) {
+      console.log(name)
+      this.$router.push(name);
+    },
   },
 };
 </script>

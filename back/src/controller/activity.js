@@ -13,7 +13,6 @@ module.exports={
 
     },
     showAll(req,res){
-      console.log(req.params.name)
       if(req.params.name=='admin'){
         db.all('SELECT * from activity', function (err, result) {
           if (err) {
@@ -46,7 +45,6 @@ module.exports={
           }
         })
       }else{
-        console.log(req.body)
         let {activityID,title,thumbnail,content,pictures,status} = req.body
         db.run(`UPDATE activity SET title = '${title}',thumbnail='${thumbnail}',
         content='${content}',pictures='${pictures}',status='${status}' WHERE activityID = ${activityID}`,
