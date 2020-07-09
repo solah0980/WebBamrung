@@ -14,7 +14,10 @@ import TeacherCreate from '../views/admin/teacher/Create'
 import ActivityViews from '../views/admin/activity/index'
 import ActivityCreate from '../views/admin/activity/create'
 import ActivityEdit from '../views/admin/activity/edit'
-
+import NewsCreate from '../views/admin/news/create'
+import EditNews from '../views/admin/news/edit'
+import News from '../views/admin/news/index'
+import NewsShow from '../views/NewsSub'
 Vue.use(VueRouter)
 
   const routes = [
@@ -86,6 +89,26 @@ Vue.use(VueRouter)
     path: '/admin/activity/edit/:id',
     name: 'ActivityEdit',
     component: ActivityEdit
+  },
+  {
+    path: '/admin/news/create',
+    name: 'NewsCreate',
+    component: NewsCreate
+  },
+  {
+    path: '/admin/news/edit/:id',
+    name: 'EditNews',
+    component: EditNews
+  },
+  {
+    path: '/admin/news',
+    name: 'News',
+    component: News
+  },
+  {
+    path: '/news/show/:id',
+    name: 'NewsShow',
+    component: NewsShow
   }
 ]
 

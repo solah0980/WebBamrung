@@ -51,6 +51,7 @@
 <script>
 import Navbar from "../../../components/navbarAdmin";
 import Api from "../../../services/AdminServices";
+import {mapState} from 'vuex'
 export default {
   data() {
     return {
@@ -88,6 +89,14 @@ export default {
   async created() {
     this.data = (await Api.ShowAllTeacher()).data;
     this.getPhoto();
+  },
+  mounted(){
+    if(this.isUserLoggedIn==false){
+      this.$router.push('/admin/login')
+    }
+  },
+  computed: {
+    ...mapState(['isUserLoggedIn'])
   },
 };
 </script>

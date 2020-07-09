@@ -56,6 +56,7 @@ import VueCkeditor from "vue-ckeditor2";
 import Navbar from "../../../components/navbarAdmin";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import Api from "../../../services/AdminServices";
+import {mapState} from 'vuex'
 export default {
   data() {
     return {
@@ -150,6 +151,14 @@ export default {
     if (this.data.pictures !== null && this.data.pictures !== "") {
       this.photo = JSON.parse(this.data.pictures);
     } */
+  },
+  mounted(){
+    if(this.isUserLoggedIn==false){
+      this.$router.push('/admin/login')
+    }
+  },
+  computed: {
+    ...mapState(['isUserLoggedIn'])
   },
 };
 </script>

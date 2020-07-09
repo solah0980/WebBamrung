@@ -6,7 +6,9 @@ import router from './router'
 import store from './store'
 import ScrollAnimation from './directives/scrollanimation'
 import CKEditor from '@ckeditor/ckeditor5-vue';
+import {sync} from 'vuex-router-sync'
 
+sync(store,router)
 Vue.use( CKEditor );
 
 Vue.directive('scrollanimation', ScrollAnimation);

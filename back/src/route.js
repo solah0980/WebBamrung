@@ -3,6 +3,7 @@ const subject = require('./controller/subject')
 const teacher = require('./controller/teacher')
 const client = require('./controller/client')
 const activity = require('./controller/activity')
+const news = require('./controller/news')
 const authen = require('./authen/authen')
 let fs = require('fs')
 let multer = require('multer')
@@ -39,6 +40,12 @@ module.exports = (app)=>{
    app.get('/admin/activitys/:name',activity.showAll)
    app.post('/admin/activity/create',activity.createActivity)
    app.put('/admin/activity/edit/:id',activity.editActivity)
+
+   //Api News Admin
+   app.post('/admin/news/create',news.create)
+   app.get('/admin/news/show/:id',news.showNews)
+   app.put('/admin/news/edit/:id',news.editNews)
+   app.get('/admin/news/:name',news.showAll)
 
     //Api Upload Photo and Delete Photo
     app.post('/upload',function(req,res){

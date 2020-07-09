@@ -107,6 +107,7 @@
 <script>
 import Navbar from "../../../components/navbarAdmin";
 import Api from "../../../services/AdminServices";
+import {mapState} from 'vuex'
 export default {
   data() {
     return {
@@ -176,6 +177,14 @@ export default {
       });
       console.log(this.photo);
     },
+  },
+  mounted(){
+    if(this.isUserLoggedIn==false){
+      this.$router.push('/admin/login')
+    }
+  },
+  computed: {
+    ...mapState(['isUserLoggedIn'])
   },
 
 }

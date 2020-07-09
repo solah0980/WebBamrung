@@ -1,6 +1,10 @@
 import Api from './Api'
 
 export default {
+    //Api Login 
+    Login(data){
+        return Api().post('/admin/login',data)
+    },
 
    //Api Upload Delete Photo
     upload(formdata){
@@ -63,6 +67,20 @@ export default {
     },
     ShowActivity(id){
         return Api().get('/admin/activity/show/'+id)
-    }
-    
+    },
+     /*----------------------------------------------------*/
+
+     //API Mange News
+     CreateNews(data){
+         return Api().post('/admin/news/create',data)
+     },
+     ShowNews(data){
+        return Api().get('/admin/news/show/'+data)
+     },
+     EditNews(data){
+        return Api().put('/admin/news/edit/'+data.newsID,data)
+     },
+     ShowAllNews(data){
+         return Api().get('/admin/news/'+data.name)
+     }
 }

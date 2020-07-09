@@ -27,12 +27,22 @@ module.exports = {
             return console.log(error);
           }
           if (result == undefined) {
-            return res.send({ error: "Not found user" });
+            return res.send({ error: "Not found User" });
           }
+
           let resultPass = bcrypt.compareSync(password, result.password);
           if (resultPass == true) {
             let jwt = signJWT(result);
-            res.send(jwt);
+            let data = {
+              user:{
+                username:result.username,
+                name:result.name,
+                lastname:result.lastname,
+                email:result.email
+              },
+              token:jwt
+            }
+            res.send(data);
           } else {
             res.send({ error: "password wrong" });
           }

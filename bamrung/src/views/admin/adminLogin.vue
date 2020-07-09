@@ -2,7 +2,7 @@
   <div>
     <div class="body">
       <div class="container">
-        <form>
+        <form @submit.prevent="Login">
           <div class="form-group">
               <div class="form-head mb-4">
                   <div class="row">
@@ -20,6 +20,8 @@
               class="form-control"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
+              v-model="username"
+              required
             />
           </div>
           <div class="form-group">
@@ -27,7 +29,9 @@
             <input
               type="password"
               class="form-control"
+              v-model="password"
               id="exampleInputPassword1"
+              required
             />
           </div>
           <button type="submit" class="btn btn-success mt-2">Login</button>
@@ -37,7 +41,55 @@
   </div>
 </template>
 <script>
-export default {};
+import Api from '../../services/AdminServices'
+import {mapState} from 'vuex'
+export default {
+  data(){
+    return{
+      username:null,
+      password:null,
+      result:null
+    }
+  },
+  methods:{
+   async Login(){
+      let data={
+        username:this.username,
+        password:this.password,
+      }
+      let r = (await Api.Login(data)).data
+      if(r.error=='Not found User'){
+         Swal.fire({
+          title: `ไม่มี ${this.username} ในระบบ`,
+          icon: "error",
+          confirmButtonText: "ตกลง",
+        })
+      }else if(r.error=='password wrong'){
+        Swal.fire({
+          title: `Password ผิด`,
+          icon: "error",
+          confirmButtonText: "ตกลง",
+        })
+      }else{
+        this.$store.dispatch('setUser',r.user)
+        this.$store.dispatch('setToken',r.token)
+        Swal.fire({
+          title: `เข้าสู่ระบบสำเร็จ`,
+          icon: "success",
+          confirmButtonText: "ตกลง",
+        }).then(()=>this.$router.push('/admin/dashboard'))
+      }
+    }
+  },
+  computed:{
+    ...mapState(['isUserLoggedIn'])
+  },
+  mounted() {
+    if(this.isUserLoggedIn){
+      this.$router.push('/admin/dashboard')
+    }
+  },
+};
 </script>
 <style scoped>
 .body{

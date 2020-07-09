@@ -5,7 +5,7 @@
       type="button"
       class="btn btn-success"
       style="width:100%;margin-top:20px;"
-      @click="$router.push('/admin/activity/create')"
+      @click="$router.push('/admin/news/create')"
     >
       เพิ่มกิจกรรม
     </button>
@@ -13,27 +13,27 @@
       <thead class="thead-dark">
         <tr>
           <th scope="col">#</th>
-          <th scope="col">ชื่อกิจกรรม</th>
+          <th scope="col">หัวข้อข่าวสาร</th>
           <th scope="col">แก้ไขเนื้อหา</th>
-          <th scope="col">สถานะเปิดเผยกิจกรรม</th>
+          <th scope="col">สถานะเปิดเผยข่าวสาร</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="d in data" :key="d.gsubjectID">
+        <tr v-for="d in data" :key="d.newsID">
           <th scope="row">#</th>
           <td>{{ d.title }}</td>
           <td>
             <router-link
               type="button"
               class="btn btn-info"
-              :to="pathEdit + d.activityID"
+              :to="pathEdit + d.newsID"
               >แก้ไข</router-link
             >
           </td>
           <td style="width:400px">
             <label class="switch">
-              <input v-if="d.status=='true'" type="checkbox" @click="StatusActivity(d)" checked/>
-              <input v-if="d.status=='false'" type="checkbox" @click="StatusActivity(d)"/>
+              <input v-if="d.status=='true'" type="checkbox" @click="StatusNews(d)" checked/>
+              <input v-if="d.status=='false'" type="checkbox" @click="StatusNews(d)"/>
               <span class="slider round"></span>
             </label>
           </td>
@@ -51,9 +51,8 @@ export default {
     return {
       gsubjectID: null,
       selectTeacher: null,
-      modalName: "",
       data: null,
-      pathEdit: "/admin/activity/edit/",
+      pathEdit: "/admin/news/edit/",
       pathTeacher: "",
     };
   },
@@ -61,24 +60,22 @@ export default {
     Navbar,
   },
   methods: {
-    async StatusActivity(data){
+    async StatusNews(data){
         if(data.status=='true'){
             data.status='false'
             data.set='true'
-            let result = await Api.EditActivity(data)
+            let result = await Api.EditNews(data)
         }else{
             data.status='true'
             data.set='true'
-            let result = await Api.EditActivity(data)
+            let result = await Api.EditNews(data)
         }
         
     },
-    Clear() {
-      this.teacherHave = [];
-    },
   },
   async created() {
-    this.data = (await Api.ShowActivityAll({name:'admin'})).data;
+    this.data = (await Api.ShowAllNews({name:'admin'})).data;
+    
   },
   mounted(){
     if(this.isUserLoggedIn==false){

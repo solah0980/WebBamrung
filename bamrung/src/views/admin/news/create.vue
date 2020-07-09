@@ -1,16 +1,15 @@
 <template>
   <div>
     <Navbar />
-    <form class="mt-5" v-on:submit.prevent="EditBlog">
+    <form class="mt-5" v-on:submit.prevent="CreateBlog">
       <div class="form-group">
-        <label for="exampleInputEmail1">กลุ่มสาระ</label>
+        <label for="exampleInputEmail1">เรื่อง</label>
         <input
           type="text"
           class="form-control"
           id="exampleInputEmail1"
           aria-describedby="emailHelp"
           v-model="data.title"
-          disabled
         />
       </div>
       <div class="form-group form-2">
@@ -35,6 +34,9 @@
       <div class="form-group d-flex flex-wrap flex-row" v-if="photo !== []">
         <div v-for="n in photo" :key="n" class="ml-3">
           <img :src="baseURL + n" alt="" width="150" /><br />
+          <button type="button" class="btn btn-info" @click="addThumbnail(n)">
+            ตั้งเป็นภาพปก
+          </button>
           <button type="button" class="btn btn-danger" @click="DeletePhoto(n)">
             ลบรูป
           </button>
@@ -53,8 +55,14 @@ import {mapState} from 'vuex'
 export default {
   data() {
     return {
-      baseURL: "/api/assets/uploads/",
-      data: {},
+      baseURL: "http://localhost:8081/assets/uploads/",
+      data: {
+         title:null,
+         thumbnail:null,
+         content:null,
+         pictures:null,
+         date:null 
+      },
       photo: [],
       editorData: "",
       editor: ClassicEditor,
@@ -79,7 +87,6 @@ export default {
         name.push(file[x].name);
       });
       let data = await Api.upload(formData);
-      console.log(data)
       /* await Api.AddPhoto({gsubjectID:this.data.gsubjectID,pictures:JSON.stringify(name)}) */
       this.updatePhoto(name);
     },
@@ -89,29 +96,30 @@ export default {
       });
     },
 
-    async EditBlog() {
-      let idDB = this.$route.params.id;
+    async CreateBlog() {
       let photo = JSON.stringify(this.photo);
       let data = {
-        id: idDB,
         title: this.data.title,
         content: this.data.content,
         pictures: photo,
-        teacher: "",
+        status:'true',
+        date:''
       };
-      let r = await Api.EditSubject(idDB, data);
+      console.log(data)
+       let r = await Api.CreateNews(data)
+       console.log(r.data)
       Swal.fire({
           title: r.data,
           icon: "success",
           confirmButtonText: "ตกลง",
-        }).then(()=>this.$router.push({name:'Subject'}))
+        }).then(()=>this.$router.push({name:'News'})) 
       
     },
 
     async DeletePhoto(name) {
       let x = confirm("ยืนยันลบรูป");
       if (x) {
-        console.log("delete photo");
+        this.data.thumbnail=null
         this.DeletePhotoUpdate(this.photo, name);
         let r = await Api.delete({ name: name });
         Swal.fire({
@@ -119,7 +127,6 @@ export default {
           icon: "success",
           confirmButtonText: "ตกลง",
         });
-        console.log(r);
       }
     },
 
@@ -127,19 +134,7 @@ export default {
       this.photo = arr.filter((e) => {
         return e != name;
       });
-      console.log(this.photo);
     },
-    
-  },
-
-  async created() {
-    let id = this.$route.params.id;
-    this.data = await Api.ShowSubject(id);
-    this.data = this.data.data;
-    if (this.data.pictures !== null && this.data.pictures !== "") {
-      this.photo = JSON.parse(this.data.pictures);
-    }
-  },
   mounted(){
     if(this.isUserLoggedIn==false){
       this.$router.push('/admin/login')
@@ -147,6 +142,16 @@ export default {
   },
   computed: {
     ...mapState(['isUserLoggedIn'])
+  },
+  },
+
+  async created() {
+    /* let id = this.$route.params.id;
+    this.data = await Api.ShowSubject(id);
+    this.data = this.data.data;
+    if (this.data.pictures !== null && this.data.pictures !== "") {
+      this.photo = JSON.parse(this.data.pictures);
+    } */
   },
 };
 </script>

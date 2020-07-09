@@ -51,7 +51,6 @@
                 <a class="dropdown-item" @click="navigateTo({name:'SubjectView',query:{name:'ภาษาไทย'}})">กลุ่มสาระภาษาไทย</a>
                 <a class="dropdown-item" @click="navigateTo({name:'SubjectView',query:{name:'คณิตศาสตร์'}})">กลุ่มสาระคณิตศาสตร์</a>
                 <a class="dropdown-item" @click="navigateTo({name:'SubjectView',query:{name:'วิทยาศาสตร์และเทคโนโลยี'}})">กลุ่มสาระวิทยาศาสตร์และเทคโนโลยี</a>
-                <a class="dropdown-item" @click="navigateTo({name:'SubjectView',query:{name:'คณิตศาสตร์'}})">กลุ่มสาระคณิตศาสตร์</a>
                 <a class="dropdown-item" @click="navigateTo({name:'SubjectView',query:{name:'สังคม'}})">กลุ่มสาระสังคม</a>
                 <a class="dropdown-item" @click="navigateTo({name:'SubjectView',query:{name:'สุขศึกษา'}})">กลุ่มสาระสุขศึกษา</a>
                 <a class="dropdown-item" @click="navigateTo({name:'SubjectView',query:{name:'ศิลปะ'}})">กลุ่มสาระศิลปะ</a>

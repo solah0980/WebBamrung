@@ -5,7 +5,7 @@
       <div class="container-fuild">
         <div class="content d-flex flex-row justify-content-between flex-wrap">
           <div class="card bg-primary text-white text-center p-3 mb-3">
-            <blockquote class="blockquote mb-0" >
+            <blockquote class="blockquote mb-0" v-on:click="navigateTo('News')">
               <h3>
                 ระบบจัดการข่าวสาร
               </h3>
@@ -39,6 +39,7 @@
 </template>
 <script>
 import Navbar from "../../components/navbarAdmin";
+import {mapState} from 'vuex'
 export default {
   components: {
     Navbar,
@@ -47,7 +48,15 @@ export default {
     navigateTo(name){
       this.$router.push({name:name})
     }
-  }
+  },
+  mounted(){
+    if(this.isUserLoggedIn==false){
+      this.$router.push('/admin/login')
+    }
+  },
+  computed: {
+    ...mapState(['isUserLoggedIn'])
+  },
 };
 </script>
 <style scoped>

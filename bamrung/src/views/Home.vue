@@ -6,6 +6,12 @@
       <div class="container">
         <div class="s-content">
           <h4 class="mt-3">ประชาสัมพันธ์</h4>
+          <div class="news-all">
+              <ul>
+                <li v-for="d in dataNews" :key="d.newsID" @click="navigateTO('/news/show/'+d.newsID)">
+                <a href="">{{d.title}}</a></li>
+              </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -16,9 +22,9 @@
           <div class="card-body col-md-9 ">
             <div class="row">
               <div class="col-md-12 d-flex flex-row flex-wrap">
-                <div class="card mb-3" v-for="d in data" :key="d.activityID" @click="navigateTO('/activity/view/'+d.activityID)">
+                <div class="card mb-3" v-for="d in dataActivity" :key="d.activityID" @click="navigateTO('/activity/view/'+d.activityID)">
                   <img
-                    :src="baseURL + d.thumbnail"
+                    :src="baseURL+d.thumbnail"
                     class="card-img-top"
                     alt="..."
                     v-if="d.thumbnail !== 'null'"
@@ -64,8 +70,9 @@ import contractSide from "../components/contractSide";
 export default {
   data() {
     return {
-      baseURL: "http://localhost:8081/assets/uploads/",
-      data: null,
+      baseURL: "/api/assets/uploads/",
+      dataActivity: null,
+      dataNews:null,
       title1: "โรงเรียนบำรุงอิสลาม",
       title2: "BAMRUNG ISLAM SCHOOL Phatthalung",
     };
@@ -76,8 +83,9 @@ export default {
     contractSide,
   },
   async created() {
-    this.data = (await Api.ShowActivityAll({ nam: "home" })).data;
-    console.log(this.data);
+    this.dataActivity = (await Api.ShowActivityAll({ nam: "home" })).data;
+    this.dataNews = (await Api.ShowAllNews({name:'client'})).data
+    console.log(this.dataNews);
   },
   methods: {
     navigateTO(name) {
@@ -97,6 +105,7 @@ export default {
   background-color: white;
 }
 .s-content {
+  overflow: hidden;
   padding: 8px;
   width: 900px;
   margin: 0 auto;
@@ -136,5 +145,19 @@ export default {
   margin-top: 20px;
   padding-bottom: 10px;
   border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+}
+.news-all ul li{
+  border-bottom: 1px dotted black;
+  font-size: 1rem;
+  padding:5px 0 5px 0;
+}
+.news-all ul li:hover{
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: green;
+}
+.news-all{
+  height: 90%;
+  overflow: scroll;
 }
 </style>
